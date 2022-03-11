@@ -12,6 +12,10 @@ Experimentations and showcasing of the algorithms are added in the `algorithms/n
 
 The class that implements the bubble sort algorithm is in the `algorithms/BubbleSort/BubbleSort.py` file.
 
+## Selection sort 
+
+The class that implements the bubble sort algorithm is in the `algorithms/SelectionSort/SelectionSort.py` file.
+
 # Tests 
 
 All the tests are in the `tests` directory.
