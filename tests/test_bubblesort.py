@@ -1,5 +1,5 @@
 # Main framework to test 
-from algorithms.BubbleSort import BubbleSort
+from algorithms.BubbleSort.BubbleSort import BubbleSort
 
 def test_bubblesort():
     # Arrange 
@@ -30,3 +30,14 @@ def test_full_bubblesort_algorithm():
         [-1, 2, 9, 19],
         [-1, 2, 9, 19]
         ] == _intermediate_results
+
+def test_sorted_array():
+    # Arrange
+    c = [1, 2, 3, 4, 5]
+
+    # Act
+    obj = BubbleSort(c)
+    obj.sort()
+
+    # This should take 4 iterations to sort the array
+    assert obj.n_iter == 4
