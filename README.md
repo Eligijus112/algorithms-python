@@ -6,6 +6,18 @@ Examples of various popular data structures and algorithms in Python.
 
 All the algorithms are in the `algorithms directory`. 
 
+Experimentations and showcasing of the algorithms are added in the `algorithms/notebooks` directory,
+
 ## Bubble sort 
 
 The class that implements the bubble sort algorithm is in the `algorithms/BubbleSort/BubbleSort.py` file.
+
+# Tests 
+
+All the tests are in the `tests` directory.
+
+To test out if the algorithms are working correctly, run the command:
+
+```
+pytest
+```
