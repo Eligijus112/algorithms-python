@@ -90,11 +90,13 @@ class InsertionSort:
         if original_entry_index is not None:
            bar1[original_entry_index].set_color(original_entry_check_color)
            bar1[original_entry_index].set_edgecolor('black')
+
         plt.xlabel("Array index")
-        plt.ylabel("Array value")
-        plt.title("Original array")
+        plt.ylabel("Original array values")
+        plt.title(title_text, fontsize=20)
 
         plt.subplot(2, 1, 2)
+        plt.ylim(min(y_true) - 1, max(y_true) + 1)
         bar2 = plt.bar(x, y, color=color, edgecolor='black')
 
         if hide_index is not None: 
@@ -110,6 +112,7 @@ class InsertionSort:
         if check_index_right is not None:
             bar2[check_index_right].set_color(check_color)
             bar2[check_index_right].set_edgecolor('black')
+
         plt.xlabel("Array index")
         plt.ylabel("Array value")
         plt.title("Sorted array")
@@ -144,10 +147,6 @@ class InsertionSort:
 
         # Creating the x index 
         _x = [i for i in range(1, _n + 1)]
-
-        # Infering the y limits 
-        _y_min = min(self.arr) - 1
-        _y_max = max(self.arr) + 1
 
         # List to store the filenames for later GIF creation
         filenames = []
@@ -195,7 +194,6 @@ class InsertionSort:
                     original_entry_check_color='yellow',
                     title_text='Checking...',
                     check_index_right=j - 1,
-                    check_index_left=i, 
                     check_color='yellow',
                     hide_index=range(i, _n)   
                 )
