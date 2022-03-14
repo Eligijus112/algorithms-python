@@ -14,7 +14,11 @@ The class that implements the bubble sort algorithm is in the `algorithms/Bubble
 
 ## Selection sort 
 
-The class that implements the bubble sort algorithm is in the `algorithms/SelectionSort/SelectionSort.py` file.
+The class that implements the selection sort algorithm is in the `algorithms/SelectionSort/SelectionSort.py` file.
+
+## Insertion sort 
+
+The class that implements the insertion sort algorithm is in the `algorithms/InsertionSort/InsertionSort.py` file.
 
 # Tests 
 
