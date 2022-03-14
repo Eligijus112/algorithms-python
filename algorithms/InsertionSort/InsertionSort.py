@@ -65,12 +65,14 @@ class InsertionSort:
     def plot_array(
         x: list, 
         y: list, 
+        y_true: list,
         color: str,
         filename: str, 
-        y_min: float, 
-        y_max: float,
         title_text: str,
-        check_index: int = None,
+        original_entry_index: int = None,
+        original_entry_check_color: str = None,
+        check_index_left: int = None,
+        check_index_right: int = None,
         check_color: str = None,
         hide_index: list = None
         ):
@@ -79,28 +81,40 @@ class InsertionSort:
 
         Plots a barplot given x, y and other parameters
         """
-        bar = plt.bar(x, y, color=color, edgecolor='black')
-        bar.y_max = y_max
-        bar.y_min = y_min
+        fig = plt.figure(figsize=(12, 10))
+        plt.title(title_text)
+
+        # Ploting the original array
+        plt.subplot(2, 1, 1)
+        bar1 = plt.bar(x, y_true, color='blue', edgecolor='black')
+        if original_entry_index is not None:
+           bar1[original_entry_index].set_color(original_entry_check_color)
+           bar1[original_entry_index].set_edgecolor('black')
+        plt.xlabel("Array index")
+        plt.ylabel("Array value")
+        plt.title("Original array")
+
+        plt.subplot(2, 1, 2)
+        bar2 = plt.bar(x, y, color=color, edgecolor='black')
 
         if hide_index is not None: 
             # Making the bars invisible
             for i in hide_index:
-                bar[i].set_color('white')
-                bar[i].set_edgecolor('white')
+                bar2[i].set_color('white')
+                bar2[i].set_edgecolor('white')
 
-        if check_index is not None:
-            bar[check_index].set_color(check_color)
-            bar[check_index].set_edgecolor('black')
+        if check_index_left is not None:
+            bar2[check_index_left].set_color(check_color)
+            bar2[check_index_left].set_edgecolor('black')
 
-            bar[check_index - 1].set_color(check_color)
-            bar[check_index - 1].set_edgecolor('black')
-        
-        plt.title(title_text)
-        plt.xlabel('Array index')
-        plt.ylabel('Array values')
+        if check_index_right is not None:
+            bar2[check_index_right].set_color(check_color)
+            bar2[check_index_right].set_edgecolor('black')
+        plt.xlabel("Array index")
+        plt.ylabel("Array value")
+        plt.title("Sorted array")
+
         plt.show()
-
         plt.savefig(filename)
         plt.close()
 
@@ -144,12 +158,11 @@ class InsertionSort:
 
         # Ploting the current sorted array 
         self.plot_array(
-            _x, 
-            arr_sorted, 
+            x=_x, 
+            y=arr_sorted, 
+            y_true=self.arr,
             color='blue',
             filename=filename,
-            y_min=_y_min,
-            y_max=_y_max,
             title_text='First iteration of the sorted array',
             hide_index=range(1, _n)
         )
@@ -165,11 +178,7 @@ class InsertionSort:
             # belongs 
             j = i
             clause = True
-            while j >= 1 and clause:
-
-                # Creating the tmp array
-                arr_sorted[j] = _ith_element
-
+            while j > 0 and clause:
                 # Creating the filename
                 filename = f'{_tmp_dir}/frame_{_frame_iter}.png'
                 filenames.append(filename)
@@ -177,58 +186,54 @@ class InsertionSort:
 
                 # Ploting 
                 self.plot_array(
-                    _x, 
-                    arr_sorted, 
+                    x=_x, 
+                    y=arr_sorted, 
+                    y_true=self.arr,
                     color='blue', 
                     filename=filename, 
-                    y_min=_y_min, 
-                    y_max=_y_max, 
+                    original_entry_index=i,
+                    original_entry_check_color='yellow',
                     title_text='Checking...',
-                    check_index=j, 
+                    check_index_right=j - 1,
+                    check_index_left=i, 
                     check_color='yellow',
-                    hide_index=range(i + 1, _n)   
+                    hide_index=range(i, _n)   
                 )
 
-                # Extracting the elements used for checking 
-                _left_element = arr_sorted[j - 1]
-                _right_element = arr_sorted[j]
+                # Extracting the jth element to check. This entry is already in the list
+                _jth_element = arr_sorted[j - 1]
 
-                filename = f'{_tmp_dir}/frame_{_frame_iter}.png'
-                filenames.append(filename)
-                _frame_iter += 1
-
-                if _left_element > _right_element:
-                    arr_sorted[j - 1] = _right_element
-                    arr_sorted[j] = _left_element
-
-                    self.plot_array(
-                        _x, 
-                        arr_sorted, 
-                        color='blue', 
-                        filename=filename, 
-                        y_min=_y_min, 
-                        y_max=_y_max, 
-                        title_text='Elements switched',
-                        check_index=j, 
-                        check_color='red',
-                        hide_index=range(i + 1, _n)
-                    )
-
-                    j += -1
+                if _ith_element < _jth_element:
+                    if j != 0:
+                        j += -1
+                    else: 
+                        clause = False
                 else: 
-                    self.plot_array(
-                        _x, 
-                        arr_sorted, 
-                        color='blue', 
-                        filename=filename, 
-                        y_min=_y_min, 
-                        y_max=_y_max, 
-                        title_text='Elements are in order',
-                        check_index=j, 
-                        check_color='green',
-                        hide_index=range(i + 1, _n)
-                    )
                     clause = False
+
+            # Shifting all the elements from the jth coordinate to the right 
+            arr_sorted[(j + 1):(i + 1)] = arr_sorted[j:i]  
+            
+            # Placing the number to the right coordinate
+            arr_sorted[j] = _ith_element
+
+            filename = f'{_tmp_dir}/frame_{_frame_iter}.png'
+            filenames.append(filename)
+            _frame_iter += 1
+
+            self.plot_array(
+                    x=_x, 
+                    y=arr_sorted, 
+                    y_true=self.arr,
+                    color='blue', 
+                    filename=filename, 
+                    original_entry_index=i,
+                    original_entry_check_color='yellow',
+                    title_text='Added the element here',
+                    check_index_left=j, 
+                    check_color='red',
+                    hide_index=range(i + 1, _n)   
+                )
 
         # Build GIF
         with imageio.get_writer(os.path.join(_gif_dir, 'insertion_sort.gif'), mode='I', duration=animation_speed) as writer:
