@@ -18,7 +18,7 @@ The class that implements the selection sort algorithm is in the `algorithms/Sel
 
 ## Insertion sort 
 
-The class that implements the insertion sort algorithm is in the `algorithms/SelectionSort/InsertionSort.py` file.
+The class that implements the insertion sort algorithm is in the `algorithms/InsertionSort/InsertionSort.py` file.
 
 # Tests 
 
