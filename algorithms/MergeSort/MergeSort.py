@@ -1,7 +1,4 @@
-# Dir traversal 
-import os 
-
-class MergeSortNode:
+class MergeSort:
     def __init__(self, arr):
         # Ensuring the correct type 
         if type(arr) != list:
@@ -35,8 +32,8 @@ class MergeSortNode:
 
             # Creating the pointers in memory to left and 
             # right nodes
-            self.left = MergeSortNode(left_arr)
-            self.right = MergeSortNode(right_arr)
+            self.left = MergeSort(left_arr)
+            self.right = MergeSort(right_arr)
 
     def merge_sort(self):
         """

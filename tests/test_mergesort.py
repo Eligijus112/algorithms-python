@@ -1,5 +1,5 @@
 # Importing the main framework
-from algorithms.MergeSort.MergeSort import MergeSortNode
+from algorithms.MergeSort.MergeSort import MergeSort
 
 def test_merge_sort_min_node():
     """
@@ -9,7 +9,7 @@ def test_merge_sort_min_node():
     a = [5, -1]
 
     # Act 
-    node = MergeSortNode(a)
+    node = MergeSort(a)
     node.merge_sort()
 
     # Assert 
@@ -25,7 +25,7 @@ def test_node_spliting():
     a = [5, -1, -99, 168, 54, 12, 3]
 
     # Act 
-    node = MergeSortNode(a)
+    node = MergeSort(a)
 
     # Assert 
     assert node.left.arr == [5, -1, -99]
@@ -48,7 +48,7 @@ def test_merge_sort_full():
     a = [5, -1, -99, 168, 54, 12, 3]
 
     # Act 
-    node = MergeSortNode(a)
+    node = MergeSort(a)
     node.merge_sort()
 
     # Asserting 

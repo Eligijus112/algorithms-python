@@ -20,6 +20,10 @@ The class that implements the selection sort algorithm is in the `algorithms/Sel
 
 The class that implements the insertion sort algorithm is in the `algorithms/InsertionSort/InsertionSort.py` file.
 
+## Merge sort
+
+The class that implements the merge sort algorithm is in the `alogirthms/MergeSort/MergeSort.py` file.
+
 # Tests 
 
 All the tests are in the `tests` directory.
