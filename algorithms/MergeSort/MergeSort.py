@@ -1,14 +1,11 @@
-class MergeSort:
-    def __init__(self, arr):
-        # Ensuring the correct type 
-        if type(arr) != list:
-            raise TypeError("Expected a list")
-        
-        # Saving the array to memory 
-        self.arr = arr
+# Base class
+from algorithms.BaseClass import BaseClass
 
-        # Saving the length of the array 
-        self.n = len(arr)
+
+class MergeSort(BaseClass):
+    def __init__(self, arr):
+        # Inheriting from base class
+        super().__init__(arr)
 
         # Spliting the nodes further 
         self.split_node()

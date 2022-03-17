@@ -1,14 +1,11 @@
-class QuickSort:
-    def __init__(self, arr):
-        # Ensuring the correct type 
-        if type(arr) != list:
-            raise TypeError("Expected a list")
-        
-        # Saving the array to memory 
-        self.arr = arr
+# Base class
+from algorithms.BaseClass import BaseClass
 
-        # Saving the length of the array 
-        self.n = len(arr)
+
+class QuickSort(BaseClass):
+    def __init__(self, arr):
+        # Inheriting from base class 
+        super().__init__(arr)
 
         # Indication whether the current element is partitioned or not 
         self.sorted = False
