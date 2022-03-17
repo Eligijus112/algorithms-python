@@ -200,7 +200,7 @@ class SelectionSort():
                 _frame_iter += 1
 
         # Build GIF
-        with imageio.get_writer(os.path.join(_gif_dir, 'bubble_sort.gif'), mode='I', duration=animation_speed) as writer:
+        with imageio.get_writer(os.path.join(_gif_dir, 'selection_sort.gif'), mode='I', duration=animation_speed) as writer:
             for filename in filenames:
                 image = imageio.imread(filename)
                 writer.append_data(image)
