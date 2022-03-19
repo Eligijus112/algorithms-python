@@ -60,7 +60,7 @@ class AnimateBubbleSort(BubbleSort):
         
         if vertical_line_index is not None:
             plt.axvline(x=vertical_line_index + 0.5, color='red', label='Max coordinate to be checked')
-            plt.legend()
+            plt.legend(loc = "lower left")
 
         plt.title(title)
         plt.xlabel('Array index')
