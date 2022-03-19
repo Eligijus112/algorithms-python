@@ -40,6 +40,7 @@ class AnimateBubbleSort(BubbleSort):
         title: str,
         check_index: int = None,
         check_color: str = None,
+        vertical_line_index: int = None,
         ):
         """
         A helper method for the animation of sorting. 
@@ -57,6 +58,10 @@ class AnimateBubbleSort(BubbleSort):
             bar[check_index + 1].set_color(check_color)
             bar[check_index + 1].set_edgecolor('black')
         
+        if vertical_line_index is not None:
+            plt.axvline(x=vertical_line_index + 0.5, color='red', label='Max coordinate to be checked')
+            plt.legend()
+
         plt.title(title)
         plt.xlabel('Array index')
         plt.ylabel('Array values')
@@ -117,6 +122,8 @@ class AnimateBubbleSort(BubbleSort):
         # Animating the sorting 
         _frame_iter = 1
         for i in range(self.n - 1):
+            _cur_changes = 0
+
             for j in range(self.n - i - 1): 
                 # Creating the filename
                 filename = f'{_tmp_dir}/frame_{_frame_iter}.png'
@@ -132,7 +139,8 @@ class AnimateBubbleSort(BubbleSort):
                     y_max=_y_max,
                     title='Checking elements...',
                     check_index=j,
-                    check_color='yellow'
+                    check_color='yellow',
+                    vertical_line_index=self.n - i
                 )
 
                 # Incrementing the frame counter
@@ -147,6 +155,9 @@ class AnimateBubbleSort(BubbleSort):
                 filenames.append(filename)
 
                 if right_element < left_element:
+                    # Incrementing the changes counter
+                    _cur_changes += 1
+
                     # Switching the left and right elements
                     self.arr_sorted[j] = right_element
                     self.arr_sorted[j + 1] = left_element
@@ -161,7 +172,8 @@ class AnimateBubbleSort(BubbleSort):
                         y_max=_y_max,
                         title='Changing the elements',
                         check_index=j,
-                        check_color='red'
+                        check_color='red',
+                        vertical_line_index=self.n - i
                     )
                 else: 
                     # Ploting the array
@@ -174,11 +186,16 @@ class AnimateBubbleSort(BubbleSort):
                         y_max=_y_max,
                         title='Elements are in order',
                         check_index=j,
-                        check_color='green'
+                        check_color='green',
+                        vertical_line_index=self.n - i
                     )
                 
                 # Incrementing the iteration 
                 _frame_iter += 1
+            
+            # If no changes were made this means that the array is sorted
+            if _cur_changes == 0:
+                break
 
         # Build GIF
         with imageio.get_writer(os.path.join(_gif_dir, gif_name), mode='I', duration=animation_speed) as writer:
