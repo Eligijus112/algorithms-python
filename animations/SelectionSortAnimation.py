@@ -41,6 +41,7 @@ class AnimateSelectionSort(SelectionSort):
         check_index_min: int = None,
         check_index_cur: int = None,
         check_color: str = None,
+        vertical_line_index: int = None,
         ):
         """
         A helper method for the animation of sorting. 
@@ -58,6 +59,10 @@ class AnimateSelectionSort(SelectionSort):
             bar[check_index_cur].set_color(check_color)
             bar[check_index_cur].set_edgecolor('black')
         
+        if vertical_line_index is not None:
+            plt.axvline(x=vertical_line_index - 0.5, color='red', label='Min coordinate to be checked')
+            plt.legend(loc = "lower left")
+
         plt.title(title)
         plt.xlabel('Array index')
         plt.ylabel('Array values')
@@ -86,7 +91,7 @@ class AnimateSelectionSort(SelectionSort):
         _n = self.n
 
         # Creating the x index 
-        _x = [i for i in range(1, _n + 1)]
+        _x = [i for i in range(0, _n)]
 
         # Infering the y limits 
         _y_min = min(self.arr) - 1
@@ -107,7 +112,8 @@ class AnimateSelectionSort(SelectionSort):
             filename=filename,
             y_min=_y_min,
             y_max=_y_max,
-            title='Initial array'
+            title='Initial array',
+            vertical_line_index=0
         )
 
         # Reseting the sorted array
@@ -132,7 +138,8 @@ class AnimateSelectionSort(SelectionSort):
                     title='Checking elements...',
                     check_index_min=i,
                     check_index_cur=j,
-                    check_color='yellow'
+                    check_color='yellow',
+                    vertical_line_index=i
                 )
 
                 # Incrementing the frame counter
@@ -162,7 +169,8 @@ class AnimateSelectionSort(SelectionSort):
                         title='Changing the elements',
                         check_index_min=i,
                         check_index_cur=j,
-                        check_color='red'
+                        check_color='red',
+                        vertical_line_index=i
                     )
                 else: 
                     # Ploting the array
@@ -176,7 +184,8 @@ class AnimateSelectionSort(SelectionSort):
                         title='Elements are in order',
                         check_index_cur=j,
                         check_index_min=i,
-                        check_color='green'
+                        check_color='green',
+                        vertical_line_index=i
                     )
                 
                 # Incrementing the iteration 
