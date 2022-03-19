@@ -1,6 +1,3 @@
-# OS traversal 
-import os 
-
 # Importing the base class
 from algorithms.BaseClass import BaseClass
 
@@ -12,9 +9,6 @@ class SelectionSort(BaseClass):
         ):
         # Inheriting the base class
         super().__init__(arr)
-
-        # Infering the current file dir 
-        self.current_dir = os.path.dirname(os.path.realpath(__file__))
 
     def sort(self):
         """
