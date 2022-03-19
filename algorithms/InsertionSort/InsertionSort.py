@@ -1,6 +1,3 @@
-# OS traversal 
-import os 
-
 # Importing the base class 
 from algorithms.BaseClass import BaseClass
 
@@ -12,9 +9,6 @@ class InsertionSort(BaseClass):
         ):
         # Inheriting the base class constructor
         super().__init__(arr)        
-
-        # Infering the local file path
-        self.current_dir = os.path.dirname(os.path.realpath(__file__))
 
     def sort(self):
         """
