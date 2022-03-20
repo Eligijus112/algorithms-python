@@ -7,12 +7,14 @@ class MergeSort(BaseClass):
         # Inheriting from base class
         super().__init__(arr)
 
-        # Spliting the nodes further 
+        # Initiating the recursive splitting of the arrays
         self.split_node()
 
         # When creating the node, the initial arr in state is not sorted
         self.sorted = False
+
         if self.n == 1:
+            # An array of length 1 is always sorted
             self.sorted = True
 
     def split_node(self):
@@ -28,7 +30,7 @@ class MergeSort(BaseClass):
             right_arr = self.arr[middle_point:]
 
             # Creating the pointers in memory to left and 
-            # right nodes
+            # right subarrays
             self.left = MergeSort(left_arr)
             self.right = MergeSort(right_arr)
 
